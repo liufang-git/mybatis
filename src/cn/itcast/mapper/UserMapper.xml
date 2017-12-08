@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：隔离SQL映射文件的，是一个SQL映射文件的唯一标识 -->
+<mapper namespace="user">
+	<!-- SQL映射 -->
+	
+	<!-- 根据Id查询用户信息 -->
+	<select id="selectUserById" parameterType="int" resultType="cn.itcast.pojo.User">
+		select
+			userId,name,mobile,sex,age,address
+		FROM
+			user
+		WHERE
+			userId = #{id}
+	</select>
+	
+	<!-- 根据用户名称查询用户信息 -->
+	<select id="selectUserByName" parameterType="String" 
+		resultType="cn.itcast.pojo.User">
+		SELECT
+			userId,name,mobile,sex,age,address
+		FROM
+			user
+		WHERE
+			name LIKE #{userName}
+	</select>
+	
+	<select id="selectUserByName2" parameterType="String" 
+		resultType="cn.itcast.pojo.User">
+		SELECT
+			userId,name,mobile,sex,age,address
+		FROM
+			user
+		WHERE
+			name LIKE '%${value}%'
+	</select>
+	
+	<!-- 插入用户信息 -->
+	<insert id="insertUserInfo" parameterType="cn.itcast.pojo.User">
+		<selectKey order="AFTER" keyProperty="userId" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO user
+			(name,mobile,sex,age,address)
+		VALUES
+			(#{name},#{mobile},#{sex},#{age},#{address})
+	</insert>
+	
+	<!-- 根据id更新用户信息 -->
+	<update id="updateUserById" parameterType="cn.itcast.pojo.User">
+		UPDATE USER
+		SET
+			NAME=#{name},
+			mobile=#{mobile},
+			sex=#{sex},
+			age=#{age},
+			address=#{address}
+		WHERE
+			userId = #{userId}
+	</update>
+	
+	<!-- 根据id删除用户信息 -->
+	<delete id="deleteUserById" parameterType="int">
+		delete from user where userId = #{uid}
+	</delete>
+	
+	<!-- 根据id查詢用户信息 -->
+	<select id="selectById" parameterType="int" resultType="cn.itcast.pojo.User">
+	select
+			userId,name,mobile,sex,age,address
+		FROM
+			user
+		WHERE userId=#{id}
+	</select>
+		<!-- 取得用户表的记录数 -->
+	<select id="countUserRecord" resultType="int">
+		SELECT COUNT(userId) FROM user
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

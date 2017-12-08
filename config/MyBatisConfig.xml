@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<properties resource="jdbc.properties" />
+	
+	<!-- 自定义java bean的别名 -->
+	<typeAliases>
+		<typeAlias type="cn.itcast.pojo.User" alias="User"/>
+	</typeAliases>
+	
+	<!-- 数据库环境的配置（临时配置） -->
+	<environments default="dev">
+		<!-- 开发数据库环境的配置 -->
+		<environment id="dev">
+			<!-- 事务管理的配置 -->
+			<transactionManager type="JDBC"/>
+			<!-- 数据源配置:driver, url, username, password -->
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 配置映射文件 -->
+	<mappers>
+	
+		<!-- 方式一：通过指定映射文件的相对路径 -->
+		<mapper resource="cn/itcast/mapper/UserMapper.xml"/>
+		<mapper resource="cn/itcast/mapper/UserMapper2.xml"/>
+		
+		<!-- 方式二:通过dao接口的全名加载它对应的映射文件 -->
+		<!-- <mapper class="cn.itcast.mapper2.UserMapper3"/> -->
+		
+		<!-- 方式三:批量加载映射文件 -->
+		<package name="cn.itcast.mapper2"/>
+	</mappers>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</configuration>
